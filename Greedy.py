@@ -5,7 +5,6 @@ except ImportError:
 
 from queue import PriorityQueue
 
-
 graph3 = {
     'a': {'b':2,'c':2},
     'b': {'a':2,'d':1},
@@ -28,29 +27,34 @@ def Greedy(graph, start, goal):
     expanded=[]
     queue = PriorityQueue()
     queue.put((0, start))
+    max = 0
+    mycost =0
 
     while queue:
         cost, node = queue.get()
+        #print(type(node))
         current = node[-1]
+        print(current)
         if current not in visited:
             visited.add(current)
             expanded.append(current)
 
             if current == goal:
-                return node, expanded
+                for x in range(len(node)-1):
+                    mycost += graph[node[x]][node[x+1]]
+                return node, mycost,len(visited),max
 
             neighbours = graph[current]
             for i in neighbours:
                 if i not in visited:
                     total_cost = heuristic[i]
                     queue.put((total_cost, node+i))
+                    if queue.qsize() > max:
+                        max = queue.qsize()
 
 
-path, expanded = Greedy(graph3,'s','g')
-output = [char for char in path]
-print("\nThe optimal path using a greedy search is : " + "->".join(output))
-print("The states expanded are:")
-print(expanded)
+
+#print( Greedy(graph3,'s','g'))
 
 
 

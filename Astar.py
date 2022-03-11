@@ -14,7 +14,7 @@ g3 = {
     'r': {'e': 2, 'f': 2},
     's': {'d': 3, 'e': 9, 'p': 1}
 }
-heuristic = {'s': 0, 'a': 5, 'b': 7, 'c': 4, 'd': 7, 'e': 5, 'f': 2, 'g': 0, 'h':11, 'p': 14, 'q': 12, 'r': 3}
+heuristic = {'s': 0, 'a': 5, 'b': 7, 'c': 4, 'd': 7, 'e': 5, 'f': 2, 'g': 0, 'h': 11, 'p': 14, 'q': 12, 'r': 3}
 
 
 def astar(graph, start, goal):
@@ -24,33 +24,30 @@ def astar(graph, start, goal):
     queue = Q.PriorityQueue()
     queue.put((0, start, None))
     h2 = 0
+    max = queue.qsize()
+    mycost = 0
 
     while queue:
         cost, node, prev_n = queue.get()
         if node not in visited:
             visited.append(node)
             prev[node] = prev_n
-
             if node == goal:
                 while prev[node] != None:
                     path += [node]
                     node = prev[node]
                 path += [start]
-                return visited, prev, path[::-1]
+                for x in range(len(path) - 1):
+                    mycost += graph[path[x]][path[x + 1]]
+                return path[::-1], mycost, len(visited), max
             for i in graph[node]:
                 if i not in visited:
                     total_cost = cost + graph[node].get(i)
                     h1 = heuristic[i]
                     total = total_cost + h1 - heuristic[node]
                     queue.put((total, i, node))
+                    if queue.qsize() > max:
+                        max = queue.qsize()
 
 
-visited, prev, path = (astar(g3, 's', 'g'))
-print("The visited nodes are:")
-print(visited)
-
-print("\n The path followed is:")
-print(path)
-
-print("\n The List of previous nodes are:")
-print(prev)
+print(astar(g3, 's', 'a'))
