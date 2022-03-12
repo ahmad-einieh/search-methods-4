@@ -552,8 +552,6 @@ class Ui_root(object):
         self.total.setText(str(c))
         self.max.setText(str(d))
 
-
-
 if __name__ == "__main__":
     import sys
 
