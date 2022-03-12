@@ -50,4 +50,4 @@ def astar(graph, start, goal):
                         max = queue.qsize()
 
 
-print(astar(g3, 's', 'a'))
+#print(astar(g3, 's', 'a'))

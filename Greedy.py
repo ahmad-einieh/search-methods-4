@@ -32,13 +32,10 @@ def Greedy(graph, start, goal):
 
     while queue:
         cost, node = queue.get()
-        #print(type(node))
         current = node[-1]
-        print(current)
         if current not in visited:
             visited.add(current)
             expanded.append(current)
-
             if current == goal:
                 for x in range(len(node)-1):
                     mycost += graph[node[x]][node[x+1]]
