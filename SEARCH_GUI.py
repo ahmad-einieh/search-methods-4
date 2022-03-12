@@ -553,6 +553,7 @@ class Ui_root(object):
         self.max.setText(str(d))
 
 
+
 if __name__ == "__main__":
     import sys
 
