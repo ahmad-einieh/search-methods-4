@@ -42,23 +42,13 @@ def Greedy(graph, start, goal):
     queue = PriorityQueue()
     queue.put((0, [start], start))
 
-    max = 0
+    max = queue.qsize()
     mycost = 0
 
     while queue:
-        # node = []
+
         cost, node, tempNode = queue.get()
-        # print(x)
-        # if type(x) == list:
-        #     for r in x:
-        #         node.append(x)
-        # else:
-        #     node.append(x)
-        # print(node)
-        # if type(node) == str:
-        #     current = node
-        # else:
-        #     current = node[len(node)-1]
+
         current = node[len(node) - 1]
         if current not in visited:
             visited.add(current)
@@ -66,12 +56,7 @@ def Greedy(graph, start, goal):
             if current.casefold() == goal.casefold():
                 # print(node)
                 for x in range(len(node) - 1):
-                    print(graph[node[x]][node[x + 1]])
-                    try:
-                        mycost += graph[node[x]][node[x + 1]]
-                    except:
-                        print(node[x])
-
+                    mycost += graph[node[x]][node[x + 1]]
                 return node, mycost, len(visited), max
 
             neighbours = graph[current]

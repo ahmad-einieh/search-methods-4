@@ -565,7 +565,6 @@ class Ui_root(object):
         pyvis_graph.show(nameOfGraph)
         directory = os.getcwd()
         directory = directory.replace('\\', '/')
-        print(directory)
         url = "file:///{dir}/{name}".format(dir=directory, name=nameOfGraph)
         self.widget.setUrl(QtCore.QUrl(url))
 
@@ -594,7 +593,6 @@ class Ui_root(object):
         pyvis_graph.show(nameOfGraph)
         directory = os.getcwd()
         directory = directory.replace('\\', '/')
-        print(directory)
         url = "file:///{dir}/{name}".format(dir=directory, name=nameOfGraph)
         self.widget.setUrl(QtCore.QUrl(url))
 

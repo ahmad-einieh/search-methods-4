@@ -1,4 +1,3 @@
-
 import Distance
 import queue
 from queue import PriorityQueue
@@ -6,7 +5,7 @@ from queue import PriorityQueue
 import getGraph
 
 
-def astar(graph, start, goal):
+def greedy2(graph, start, goal):
     log2 = lat2 = ''
     for raw in open("cities2.txt", "rt"):
         a, b, c = raw.split()
@@ -33,7 +32,7 @@ def astar(graph, start, goal):
         if node not in visited:
             visited.append(node)
             prev[node] = prev_n
-            if node == goal:
+            if node.casefold() == goal.casefold():
                 while prev[node] != None:
                     path += [node]
                     node = prev[node]
@@ -43,7 +42,6 @@ def astar(graph, start, goal):
                 return path[::-1], mycost, len(visited), max
             for i in graph[node]:
                 if i not in visited:
-                    #total_cost = cost + graph[node].get(i)
                     for raw in open("cities2.txt", "rt"):
                         a, b, c = raw.split()
                         if a.casefold() == i.casefold():
@@ -52,9 +50,9 @@ def astar(graph, start, goal):
                                 break
                             except:
                                 h1 = 0
-
                     queue.put((h1, i, node))
                     if queue.qsize() > max:
                         max = queue.qsize()
 
-print(astar(getGraph.dict_graph,"Abha",'Afif'))
+
+print(greedy2(getGraph.dict_graph, "Riyadh", 'Shaqra'))
